@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ 外星小怪 · 心情戒指 ✨</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+            color: #eee;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+            padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid #4a4a6a;
+        }
+        .ring-box {
+            margin: 2rem 0;
+        }
+        #colorDisplay {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            box-shadow: 0 0 40px currentColor;
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+            border: 4px solid white;
+        }
+        button {
+            background: #6a5acd;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.1s, background 0.2s;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        button:hover {
+            background: #836fff;
+            transform: scale(0.98);
+        }
+        #moodDescription {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            min-height: 3rem;
+            font-style: italic;
+        }
+        .hint {
+            opacity: 0.7;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>👽 外星小怪 · 心情戒指 👽</h1>
+    <div class="ring-box">
+        <div id="colorDisplay" style="background-color: #3498db;"></div>
+        <div id="moodDescription">准备好探索今天的宇宙心情了吗？</div>
+        <button id="generateBtn">✨ 感应今日运势 ✨</button>
+    </div>
+    <div class="hint">颜色由宇宙背景辐射决定，运势纯属娱乐。</div>
+</div>
+
+<script>
+    (function() {
+        "use strict";
+
+        // 心情数据库：颜色 -> 外星小怪风格的运势/点评
+        const MOOD_DB = [
+            { color: '#e74c3c', text: '🔥 热情如火', tip: '今日宜表白，忌犹豫。宇宙能量提示：大胆一点！' },
+            { color: '#f1c40f', text: '🌟 金光闪闪', tip: '财运亨通！可能会在地上捡到钱，或者发现昨天衣服口袋里有十块钱。' },
+            { color: '#2ecc71', text: '🌿 绿意盎然', tip: '充满活力！今天特别适合去公园散步，或者给你的植物浇水。' },
+            { color: '#3498db', text: '💧 心如止水', tip: '今天逻辑清晰，适合解决难题。外星小怪建议你喝杯咖啡，效率加倍。' },
+            { color: '#9b59b6', text: '🔮 神秘莫测', tip: '灵感爆棚！你可能会突然想到一个绝妙的点子，快记下来。' },
+            { color: '#e67e22', text: '🍊 活力四射', tip: '创造力MAX！非常适合搞点小创作，比如画画、写段废话。' },
+            { color: '#1abc9c', text: '🌊 清新脱俗', tip: '今天你的气质很特别，可能会吸引到有趣的人或... 一只流浪猫。' }
+        ];
+
+        const colorEl = document.getElementById('colorDisplay');
+        const descEl = document.getElementById('moodDescription');
+        const btn = document.getElementById('generateBtn');
+
+        function generateMood() {
+            // 随机选择一个心情
+            const randomIndex = Math.floor(Math.random() * MOOD_DB.length);
+            const mood = MOOD_DB[randomIndex];
+            
+            // 更新颜色和文字
+            colorEl.style.backgroundColor = mood.color;
+            colorEl.style.boxShadow = `0 0 40px ${mood.color}`;
+            descEl.innerHTML = `<strong>${mood.text}</strong><br><span style="font-size: 0.9rem;">${mood.tip}</span>`;
+        }
+
+        // 绑定事件
+        btn.addEventListener('click', generateMood);
+        
+        // 页面加载时自动生成一次
+        window.addEventListener('load', generateMood);
+    })();
+</script>
+</body>
+</html>
