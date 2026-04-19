@@ -1,3 +1,7 @@
 # .gitattributes
-# 告诉 GitHub 的语言统计系统，vendor 目录下的文件不要统计
+# 告诉 GitHub 的语言统计系统：
+# 1. 将 HTML 文件视为“文档”，不计入代码统计
+*.html linguist-documentation
+
+# 2. 如果还有其他自动生成的库文件，也可以忽略
 python/vendor/* linguist-vendored
